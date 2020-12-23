@@ -25,7 +25,7 @@ pipeline{
             steps {
                 sleep(30)
                 timeout(time: 1, unit: 'MINUTES'){
-                    waitForQualityGate('SONAR_LOCAL') abortPipeline: true
+                    waitForQualityGate('SONAR_LOCAL')
                 }
             }
         }
