@@ -13,7 +13,7 @@ pipeline{
         }
         stage ('Sonar Analysis'){
             environment{
-                scannerHome = tool 'SONAR_SCANNER'
+                scannerHome = tool 'SONAR_LOCAL_QG'
             }
             steps{
                 withSonarQubeEnv('SONAR_LOCAL'){
@@ -25,7 +25,7 @@ pipeline{
             steps {
                 sleep(30)
                 timeout(time: 1, unit: 'MINUTES'){
-                    waitForQualityGate('SONAR_LOCAL')
+                    waitForQualityGate abortPipeline: true
                 }
             }
         }
