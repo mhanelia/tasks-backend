@@ -65,7 +65,16 @@ pipeline{
                 bat 'docker-compose up -d'
             }
         }
-         stage ('Health Check'){
+        }
+        stage ('Check Prod Ports'){
+            steps {
+                sleep(5)
+                dir('tasks-test-security'){
+                    bat 'npx run cypress'
+                }
+            }
+        }
+        stage ('Health Check'){
             steps {
                 sleep(5)
                 dir('functional-test'){
@@ -76,7 +85,7 @@ pipeline{
     }
     post {
         always {
-            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml '
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml, results/cypress-report.xml '
             archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', followSymlinks: false, onlyIfSuccessful: true
         }
         unsuccessful {
