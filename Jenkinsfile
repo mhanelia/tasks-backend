@@ -65,7 +65,7 @@ pipeline{
                 bat 'docker-compose up -d'
             }
         }
-        }
+        
         stage ('Check Prod Ports'){
             steps {
                 sleep(5)
@@ -84,7 +84,7 @@ pipeline{
                 }
             }
         }
-    
+    }
     post {
         always {
             junit allowEmptyResults: true, testResults: 'target/surefire-reports/*xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml, results/cypress-report.xml '
@@ -99,4 +99,5 @@ pipeline{
 
     }
 }
+
 
