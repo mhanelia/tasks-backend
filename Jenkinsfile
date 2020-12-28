@@ -70,6 +70,8 @@ pipeline{
             steps {
                 sleep(5)
                 dir('tasks-test-security'){
+                    git 'https://github.com/mhanelia/tasks-test-security'
+                    bat 'npm init -y'
                     bat 'npx run cypress'
                 }
             }
