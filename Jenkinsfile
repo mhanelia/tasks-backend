@@ -59,6 +59,16 @@ pipeline{
                 }
             }
         }
+        stage ('Check OWASP'){
+            steps {
+                sleep(5)
+                dir('tasks-test-security'){
+                    git 'https://github.com/mhanelia/tasks-test-security'
+                    bat 'npm init -y'
+                    bat 'npx cypress run --spec cypress/integration/owasp.spec.js'
+                }
+            }
+        }
         stage ('Deploy Prod'){
             steps {
                 bat 'docker-compose build'
@@ -70,9 +80,8 @@ pipeline{
             steps {
                 sleep(5)
                 dir('tasks-test-security'){
-                    git 'https://github.com/mhanelia/tasks-test-security'
                     bat 'npm init -y'
-                    bat 'npx cypress run'
+                    bat 'npx cypress run --spec cypress/integration/ports.spec.js'
                 }
             }
         }
