@@ -72,7 +72,7 @@ pipeline{
                 dir('tasks-test-security'){
                     git 'https://github.com/mhanelia/tasks-test-security'
                     bat 'npm init -y'
-                    bat 'npm run cypress'
+                    bat 'npx cypress run'
                 }
             }
         }
