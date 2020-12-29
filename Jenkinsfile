@@ -76,7 +76,7 @@ pipeline{
             }
         }
         
-        stage ('Check Prod Ports'){
+        stage ('Check Prod Open Ports'){
             steps {
                 sleep(5)
                 dir('tasks-test-security'){
